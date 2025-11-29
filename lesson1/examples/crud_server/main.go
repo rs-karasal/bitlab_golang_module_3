@@ -2,15 +2,10 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 )
 
 func main() {
-	server := &http.Server{
-		Addr: "localhost:8080",
-	}
-
 	// GET localhost:8080
 	http.HandleFunc("/users", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
@@ -34,10 +29,5 @@ func main() {
 		}
 	})
 
-	// TODO: реализовать свои ручки
-
-	log.Printf("Starting server on http://%s", server.Addr)
-	if err := server.ListenAndServe(); err != nil {
-		log.Fatal("Error starting server:", err)
-	}
+	http.ListenAndServe(":8080", nil)
 }
